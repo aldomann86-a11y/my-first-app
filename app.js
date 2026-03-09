@@ -3,8 +3,51 @@
    Simulierte KI-Ausgabe ohne externe APIs
    =================================================== */
 
-// Alle Aktions-Buttons (nicht der Kopieren-Button)
-const buttons = document.querySelectorAll('button:not(.btn-copy)');
+// Alle Aktions-Buttons (nicht der Kopieren- oder Mikrofon-Button)
+const buttons = document.querySelectorAll('button:not(.btn-copy):not(.btn-mic)');
+
+/* ---- Spracheingabe ---- */
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+let recognition = null;
+let isListening = false;
+
+if (SpeechRecognition) {
+  recognition = new SpeechRecognition();
+  recognition.lang = 'de-DE';
+  recognition.continuous = false;
+  recognition.interimResults = false;
+
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+    const textarea = document.getElementById('user-input');
+    textarea.value = textarea.value ? textarea.value + ' ' + transcript : transcript;
+    setMicState(false);
+  };
+
+  recognition.onerror = () => setMicState(false);
+  recognition.onend  = () => setMicState(false);
+}
+
+function toggleSpeech() {
+  if (!recognition) {
+    alert('Dein Browser unterstützt leider keine Spracheingabe.\nBitte verwende Chrome oder Edge.');
+    return;
+  }
+  if (isListening) {
+    recognition.stop();
+  } else {
+    recognition.start();
+    setMicState(true);
+  }
+}
+
+function setMicState(listening) {
+  isListening = listening;
+  const btn = document.getElementById('btn-mic');
+  btn.innerHTML = listening ? '<span class="mic-dot"></span> Aufnahme läuft…' : '🎤 Sprechen';
+  btn.classList.toggle('listening', listening);
+}
 
 /* ---- Lade-Zustand ---- */
 
