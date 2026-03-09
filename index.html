@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PWA: Manifest & Theme -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2f6b3b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Hofhelfer KI">
+  <link rel="apple-touch-icon" href="icon-192.svg">
+
+  <title>Hofhelfer KI</title>
+
+  <!-- Externes Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <h1>🌿 Hofhelfer KI</h1>
+    <p>Dein KI-Assistent für den Arbeitsalltag</p>
+  </header>
+
+  <main>
+
+    <!-- Eingabefeld -->
+    <div class="card">
+      <label class="input-label" for="user-input">Dein Anliegen</label>
+      <textarea
+        id="user-input"
+        placeholder="Beschreibe dein Anliegen (z.B. Kunde fragt nach Erdbeerenpreis)"
+      ></textarea>
+      <div class="validation-msg" id="validation-msg">Bitte gib zuerst einen Text ein.</div>
+    </div>
+
+    <!-- Aktions-Buttons -->
+    <div class="card">
+      <div class="buttons">
+        <button class="btn-email" onclick="handleAction('email')">
+          <span class="btn-icon">✉️</span> E-Mail
+        </button>
+        <button class="btn-notiz" onclick="handleAction('notiz')">
+          <span class="btn-icon">📋</span> Notiz
+        </button>
+        <button class="btn-ideen" onclick="handleAction('ideen')">
+          <span class="btn-icon">💡</span> Ideen
+        </button>
+      </div>
+    </div>
+
+    <!-- Ausgabebereich (anfangs versteckt) -->
+    <div class="card" id="output-card">
+      <div class="output-header">
+        <span class="output-badge" id="output-badge"></span>
+        <button class="btn-copy" onclick="copyOutput()">Kopieren</button>
+      </div>
+      <div id="output-text"></div>
+    </div>
+
+  </main>
+
+  <!-- App-Logik -->
+  <script src="app.js" defer></script>
+
+  <!-- Service Worker registrieren (PWA-Installierbarkeit) -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./service-worker.js')
+        .then(() => console.log('[App] Service Worker registriert'))
+        .catch(err => console.warn('[App] SW-Fehler:', err));
+    }
+  </script>
+
+</body>
+</html>

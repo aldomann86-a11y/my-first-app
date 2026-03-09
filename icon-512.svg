@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Hintergrund-Kreis -->
+  <circle cx="256" cy="256" r="256" fill="#2f6b3b"/>
+  <!-- Weisses "H" zentriert -->
+  <text
+    x="256"
+    y="256"
+    font-family="system-ui, -apple-system, Arial, sans-serif"
+    font-size="300"
+    font-weight="700"
+    fill="#ffffff"
+    text-anchor="middle"
+    dominant-baseline="central"
+    letter-spacing="-10"
+  >H</text>
+</svg>

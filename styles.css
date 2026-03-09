@@ -1,0 +1,249 @@
+/* ===================================================
+   Hofhelfer KI – Styles
+   Mobiloptimiert, max-width 600px, kein Framework
+   =================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f0f4f8;
+  color: #1a202c;
+  min-height: 100vh;
+  padding: 0 0 40px;
+}
+
+/* ---- Header ---- */
+header {
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 20px 16px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a202c;
+  letter-spacing: -0.02em;
+}
+
+header p {
+  font-size: 0.85rem;
+  color: #718096;
+  margin-top: 2px;
+}
+
+/* ---- Layout ---- */
+main {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ---- Card ---- */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+}
+
+/* ---- Eingabefeld ---- */
+label.input-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+textarea {
+  width: 100%;
+  min-height: 140px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #1a202c;
+  resize: vertical;
+  transition: border-color 0.2s;
+  background: #fafafa;
+  line-height: 1.6;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #4299e1;
+  background: #fff;
+}
+
+textarea::placeholder {
+  color: #a0aec0;
+}
+
+/* ---- Buttons ---- */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 14px 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: transform 0.1s, opacity 0.2s, box-shadow 0.2s;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Button-Farben */
+.btn-email { background: #2563eb; }
+.btn-email:hover:not(:disabled) {
+  background: #1d4ed8;
+  box-shadow: 0 4px 8px rgba(37,99,235,0.3);
+}
+
+.btn-notiz { background: #16a34a; }
+.btn-notiz:hover:not(:disabled) {
+  background: #15803d;
+  box-shadow: 0 4px 8px rgba(22,163,74,0.3);
+}
+
+.btn-ideen { background: #d97706; }
+.btn-ideen:hover:not(:disabled) {
+  background: #b45309;
+  box-shadow: 0 4px 8px rgba(217,119,6,0.3);
+}
+
+.btn-icon {
+  font-size: 1.1rem;
+}
+
+/* ---- Ausgabebereich ---- */
+#output-card {
+  display: none;
+}
+
+#output-card.visible {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.output-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.output-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-email { background: #dbeafe; color: #1d4ed8; }
+.badge-notiz { background: #dcfce7; color: #15803d; }
+.badge-ideen { background: #fef3c7; color: #b45309; }
+
+/* Kopieren-Button (klein, hell) */
+.btn-copy {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: auto;
+  box-shadow: none;
+}
+
+.btn-copy:hover {
+  background: #e2e8f0;
+}
+
+#output-text {
+  white-space: pre-wrap;
+  line-height: 1.75;
+  font-size: 0.97rem;
+  color: #2d3748;
+}
+
+/* ---- Lade-Spinner ---- */
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---- Validierungshinweis ---- */
+.validation-msg {
+  display: none;
+  color: #c53030;
+  font-size: 0.85rem;
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: #fff5f5;
+  border-radius: 6px;
+  border-left: 3px solid #fc8181;
+}
+
+.validation-msg.visible {
+  display: block;
+}
