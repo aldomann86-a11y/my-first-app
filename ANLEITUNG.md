@@ -4,14 +4,14 @@
 
 ### Option A: Netlify Drop (empfohlen, kostenlos, 1 Minute)
 1. Gehe zu **https://app.netlify.com/drop**
-2. Ziehe den gesamten `HofhelferKI`-Ordner per Drag & Drop ins Browser-Fenster
+2. Ziehe die Datei `c:\Users\aldom\_Claude\HofhelferKI\index.html` (oder den ganzen Ordner) per Drag & Drop ins Browser-Fenster
 3. Netlify generiert sofort eine öffentliche URL (z. B. `https://dein-name.netlify.app`)
 4. Fertig – die App ist online!
 
 ### Option B: GitHub Pages (kostenlos)
 1. Erstelle ein neues Repository auf GitHub (z. B. `hofhelfer-ki`)
-2. Lade alle Dateien hoch (`index.html`, `styles.css`, `app.js`, `manifest.json`,
-   `service-worker.js`, `icon-192.svg`, `icon-512.svg`)
+2. Lade die Datei hoch: `index.html` (einzige Datei, alles ist darin enthalten)
+   – Pfad lokal: `c:\Users\aldom\_Claude\HofhelferKI\index.html`
 3. Gehe zu **Settings → Pages → Source → main branch → / (root)**
 4. URL wird: `https://dein-username.github.io/hofhelfer-ki`
 

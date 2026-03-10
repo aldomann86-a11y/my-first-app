@@ -58,7 +58,10 @@
     <div class="card" id="output-card">
       <div class="output-header">
         <span class="output-badge" id="output-badge"></span>
-        <button class="btn-copy" onclick="copyOutput()">Kopieren</button>
+        <div class="output-actions">
+          <button class="btn-copy" onclick="copyOutput()">Kopieren</button>
+          <button class="btn-save" onclick="saveToNotion()">💾 Speichern</button>
+        </div>
       </div>
       <div id="output-text"></div>
     </div>

@@ -3,6 +3,13 @@
    Simulierte KI-Ausgabe ohne externe APIs
    =================================================== */
 
+// n8n Webhook-URL für Notion-Speicherung
+const WEBHOOK_URL = 'https://n8n.atsobl.ch/webhook/hofhelfer-notiz';
+const WEBHOOK_AUTH = 'Basic ' + btoa('hofhelfer:HofHelfer2024!');
+
+// Aktueller Ausgabe-Typ (wird bei showOutput gesetzt)
+let currentOutputType = null;
+
 // Alle Aktions-Buttons (nicht der Kopieren- oder Mikrofon-Button)
 const buttons = document.querySelectorAll('button:not(.btn-copy):not(.btn-mic)');
 
@@ -218,6 +225,7 @@ function showOutput(type, content) {
   badge.textContent = config.label;
   badge.className   = `output-badge ${config.cls}`;
   outputText.textContent = content;
+  currentOutputType = type;
 
   card.classList.add('visible');
   card.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -235,4 +243,41 @@ function copyOutput() {
     btn.textContent = 'Kopiert ✓';
     setTimeout(() => { btn.textContent = 'Kopieren'; }, 2000);
   });
+}
+
+/* ---- Notion-Speicherung ---- */
+
+/**
+ * Sendet die aktuelle Ausgabe an Notion via n8n-Webhook.
+ */
+async function saveToNotion() {
+  const text = document.getElementById('output-text').textContent;
+  const btn = document.querySelector('.btn-save');
+
+  if (!text || !currentOutputType) return;
+
+  const typMap = { email: 'E-Mail', notiz: 'Notiz', ideen: 'Idee' };
+
+  btn.disabled = true;
+  btn.textContent = '⏳ Speichern…';
+
+  try {
+    const res = await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': WEBHOOK_AUTH },
+      body: JSON.stringify({
+        notiz: text,
+        typ: typMap[currentOutputType] || 'Notiz',
+      }),
+    });
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    btn.textContent = '✅ Gespeichert';
+    setTimeout(() => { btn.textContent = '💾 Speichern'; btn.disabled = false; }, 2500);
+  } catch (err) {
+    console.error('[App] Notion-Speicherung fehlgeschlagen:', err);
+    btn.textContent = '❌ Fehler';
+    setTimeout(() => { btn.textContent = '💾 Speichern'; btn.disabled = false; }, 2500);
+  }
 }

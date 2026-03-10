@@ -3,7 +3,7 @@
    Cache-first Strategie für Offline-Unterstützung
    =================================================== */
 
-const CACHE_NAME = 'hofhelfer-v1';
+const CACHE_NAME = 'hofhelfer-v2';
 
 // Alle App-Dateien, die beim Installieren gecacht werden
 const PRECACHE_FILES = [
